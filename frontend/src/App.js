@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './App.css';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -7,192 +6,75 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 
-export default class App extends Component {
+import React from 'react';
 
-  constructor(props) {
-    super(props);
+// Adds an extra CSS file to the cascade
+// This disappears outside this file
+import './App.css';
 
-    this.state = {
-      isLoading: false,
-      formData: {
-        // 6.4,2.9,4.3,1.3
-        sepalLength: 6.4,
-        sepalWidth: 2.9,
-        petalLength: 4.3,
-        petalWidth: 1.3
-      },
-      result: ""
-    };
-  }
 
-  // handleChange = (event) => {
-  //   const value = event.target.value;
-  //   const name = event.target.name;
-  //   var formData = this.state.formData;
-  //   formData[name] = value;
-  //   this.setState({
-  //     formData
-  //   });
-  // }
+function Grad(props) {
 
-  componentDidMount = () => {
-    const formData = this.state.formData;
-    fetch('http://127.0.0.1:5000/prediction/', 
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(formData)
-      })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          result: response.result,
-          isLoading: false
-        });
-      });
+  // set up data we need
+  // name was added as a property of the component, when it was called
+  let name = props.name;
 
-  }
-
-  // handlePredictClick = (event) => {
-  //   const formData = this.state.formData;
-  //   this.setState({ isLoading: true });
-  //   fetch('http://127.0.0.1:5000/prediction/', 
-  //     {
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       method: 'POST',
-  //       body: JSON.stringify(formData)
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         result: response.result,
-  //         isLoading: false
-  //       });
-  //     });
-  // }
-
-  // handleCancelClick = (event) => {
-  //   this.setState({ result: "" });
-  // }
-
-  render() {
-    // const isLoading = this.state.isLoading;
-    // const formData = this.state.formData;
-    const result = this.state.result;
-
-    // var sepalLengths = []
-    // for (var i = 4; i <= 7; i = +(i + 0.1).toFixed(1)) {
-    //   sepalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var sepalWidths = []
-    // for (var i = 2; i <= 4; i = +(i + 0.1).toFixed(1)) {
-    //   sepalWidths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var petalLengths = []
-    // for (var i = 1; i <= 6; i = +(i + 0.1).toFixed(1)){
-    //   petalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var petalWidths = []
-    // for (var i = 0.1; i <= 3; i = +(i + 0.1).toFixed(1)) {
-    //   petalWidths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-
-    // if(this.state.result == "") {
-    //   this.handlePredictClick();
-    // }
-
-    return (
-      // <Container>
-      //   <div>
-      //     <h1 className="title">Iris Plant Classifier</h1>
-      //   </div>
-      //   <div className="content">
-      //     <Form>
-      //       <Form.Row>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Sepal Length</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.sepalLength}
-      //             name="sepalLength"
-      //             onChange={this.handleChange}>
-      //             {sepalLengths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Sepal Width</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.sepalWidth}
-      //             name="sepalWidth"
-      //             onChange={this.handleChange}>
-      //             {sepalWidths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //       </Form.Row>
-      //       <Form.Row>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Petal Length</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.petalLength}
-      //             name="petalLength"
-      //             onChange={this.handleChange}>
-      //             {petalLengths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Petal Width</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.petalWidth}
-      //             name="petalWidth"
-      //             onChange={this.handleChange}>
-      //             {petalWidths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //       </Form.Row>
-      //       <Row>
-      //         <Col>
-      //           <Button
-      //             block
-      //             variant="success"
-      //             disabled={isLoading}
-      //             onClick={!isLoading ? this.handlePredictClick : null}>
-      //             { isLoading ? 'Making prediction' : 'Predict' }
-      //           </Button>
-      //         </Col>
-      //         <Col>
-      //           <Button
-      //             block
-      //             variant="danger"
-      //             disabled={isLoading}
-      //             onClick={this.handleCancelClick}>
-      //             Reset prediction
-      //           </Button>
-      //         </Col>
-      //       </Row>
-      //     </Form>
-      //     {result === "" ? null :
-      //       (<Row>
-      //         <Col className="result-container">
-      //           <h5 id="result">{result}</h5>
-      //         </Col>
-      //       </Row>)
-      //     }
-      //   </div>
-      // </Container>
-      // // <div>Testing</div>
-      
-      <div>
-        {result}
-      </div>
+  // returns a DOM subtree
+  // notice curly braces evaluates the variable to get a string.
+  return (
+    <p className="diva">{name}</p>
   );
-  }
 }
+
+function GradRow(props) {
+
+  // for our education
+  console.log(props.children);
+  console.log(props.title);
+
+  return (
+    // adjacent elements have to be inside a container (here, a div)
+    // props.children is the children of this element in the JSX when called
+    // the curly braces around props.children evaluates the array
+    <div id="outer" >
+      <h1>{props.title}</h1>
+      <p className = "Team_Members">
+      Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez,Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez, Joshua Sanchez,Joshua Sanchez
+      </p>
+      <p className = "Bio">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium aenean pharetra magna ac. Congue quisque egestas diam in arcu cursus euismod. Elementum eu facilisis sed odio. Egestas erat imperdiet sed euismod nisi. Aenean sed adipiscing diam donec adipiscing tristique. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus et. At tellus at urna condimentum mattis pellentesque id nibh. Ipsum consequat nisl vel pretium lectus. Rutrum tellus pellentesque eu tincidunt tortor. Massa tincidunt dui ut ornare lectus sit. Morbi tincidunt ornare massa eget egestas purus. Curabitur vitae nunc sed velit. Accumsan in nisl nisi scelerisque eu ultrices. Sagittis orci a scelerisque purus.
+
+      Pretium viverra suspendisse potenti nullam. Fringilla ut morbi tincidunt augue interdum velit. Proin libero nunc consequat interdum varius sit amet mattis. Eu consequat ac felis donec et. Proin fermentum leo vel orci porta non pulvinar neque. Sapien pellentesque habitant morbi tristique senectus et netus et malesuada. Malesuada fames ac turpis egestas sed tempus urna. Ut sem viverra aliquet eget sit. Neque egestas congue quisque egestas diam in. Tincidunt praesent semper feugiat nibh sed pulvinar proin. Mattis pellentesque id nibh tortor id aliquet lectus proin nibh. Aliquam ultrices sagittis orci a scelerisque purus semper eget duis.
+
+
+      </p>
+      <div className="gradRow">
+        {props.children}
+      </div>
+    </div>
+  )
+}
+
+
+function App() {
+  return (
+    // adjacent elements have to be inside a container (here, main)
+    // the two children of the GradRow components show up as its props.children
+    <main>
+    
+      <GradRow title="Group 13 Project">
+        <Grad name="Link One" />
+        <Grad name="Link Two" />
+        <Grad name="Link Three" />
+
+      </GradRow>
+
+   
+
+
+    </main>
+  )
+}
+
+export default App;
+
