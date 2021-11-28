@@ -1,0 +1,77 @@
+
+div.CenterRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+label {
+  color: #333;
+}
+
+.result-container {
+  text-align: center;
+  font-weight: 600;
+  font-size: 4em;
+  letter-spacing: 0.15rem;
+  padding: 20px 0 0;
+}
+
+#result {
+  color: #000;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1{
+  color: #F0EAD6;
+  font-size: 30px;
+}
+p.Team_Members{
+  margin-bottom: 80px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #F0EAD6;
+}
+p.Bio{
+  margin-bottom: 140px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #F0EAD6;
+}
+div#outer {
+  width: 100%;
+  padding-bottom: 1569px;
+  margin-bottom: -1569px;
+  background-color: #468fa2;
+  text-align: center;
+}
+
+button.link {
+  margin: 5px;
+  padding: 5px;
+  width: 70px;
+  background-color:  lightsteelblue;
+}
+/*p.link_button{
+
+}*/
+
+div.footnote {
+  font-size: small;
+  text-align: left;
+  align-self: flex-end;
+  max-width: 200px;
+}
+
+div.page_container{
+  width: 100%;
+  padding-bottom: 1569px;
+  margin-bottom: -1569px;
+  background-color: #468fa2;
+  text-align: center;
+}
