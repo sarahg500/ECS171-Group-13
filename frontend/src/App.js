@@ -15,11 +15,7 @@ export default class App extends Component {
     this.state = {
       isLoading: false,
       formData: {
-        // // 6.4,2.9,4.3,1.3
-        // sepalLength: 6.4,
-        // sepalWidth: 2.9,
-        // petalLength: 4.3,
-        // petalWidth: 1.3
+        income: 10000
       },
       result: ""
     };
