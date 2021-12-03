@@ -21,37 +21,6 @@ model = app.model('Prediction params',
 
 classifier = joblib.load('classifier.joblib')
 
-# @name_space.route("/")
-# class MainClass(Resource):
-
-# 	def options(self):
-# 		response = make_response()
-# 		response.headers.add("Access-Control-Allow-Origin", "*")
-# 		response.headers.add('Access-Control-Allow-Headers', "*")
-# 		response.headers.add('Access-Control-Allow-Methods', "*")
-# 		return response
-
-# 	@app.expect(model)		
-# 	def post(self):
-# 		try: 
-# 			formData = request.json
-# 			data = [val for val in formData.values()]
-# 			prediction = classifier.predict(np.array(data).reshape(1, -1))
-# 			types = { 0: "Iris Setosa", 1: "Iris Versicolour ", 2: "Iris Virginica"}
-# 			response = jsonify({
-# 				"statusCode": 200,
-# 				"status": "Prediction made",
-# 				"result": "The type of iris plant is: " + types[prediction[0]]
-# 				})
-# 			response.headers.add('Access-Control-Allow-Origin', '*')
-# 			return response
-# 		except Exception as error:
-# 			return jsonify({
-# 				"statusCode": 500,
-# 				"status": "Could not make prediction",
-# 				"error": str(error)
-# 			})
-
 @name_space.route("/")
 class MainClass(Resource):
 
@@ -67,7 +36,7 @@ class MainClass(Resource):
 		try: 
 			formData = request.json
 			data = [val for val in formData.values()]
-			prediction = ui_api(data[0])
+			prediction = ui_api(int(data[0]))
 			print(prediction)
 			response = jsonify({
 				"statusCode": 200,

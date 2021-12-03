@@ -151,7 +151,6 @@ def ui_api(income):
     #normalizing income 
     income = (income-inc_min)/(inc_max-inc_min)
     
-    
     # getting result
     res_wine = expo_wine(income)
     res_sweetproducts = expo_sweetproducts(income)

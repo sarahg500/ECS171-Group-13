@@ -13,27 +13,27 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      isLoading: false,
-      formData: {
-        income: 10000
+      income: "",
+      outputs: {
+        wine: "N/A",
+        sweets: "N/A",
+        fish: "N/A",
+        meat: "N/A"
       },
-      result: ""
+      refresh: 0
     };
+
+    this.results = "";
+    this.handleIncomeChangeRef = this.handleIncomeChange.bind(this)
   }
 
-  // handleChange = (event) => {
-  //   const value = event.target.value;
-  //   const name = event.target.name;
-  //   var formData = this.state.formData;
-  //   formData[name] = value;
-  //   this.setState({
-  //     formData
-  //   });
-  // }
+  async predict(cur_income) {
+    const formData = {
+      income: cur_income
+    };
 
-  componentDidMount = () => {
-    const formData = this.state.formData;
-    fetch('http://127.0.0.1:5000/prediction/', 
+    if(formData.income != "" && formData.income != 0) {
+      fetch('http://127.0.0.1:5000/prediction/', 
       {
         headers: {
           'Accept': 'application/json',
@@ -44,151 +44,101 @@ export default class App extends Component {
       })
       .then(response => response.json())
       .then(response => {
+        this.results = response.result
+        var new_refresh = this.state.refresh + 1
         this.setState({
-          result: response.result,
-          isLoading: false
-        });
-      });
-
+          refresh: new_refresh
+        })
+      });    
+    }
   }
 
-  // handlePredictClick = (event) => {
-  //   const formData = this.state.formData;
-  //   this.setState({ isLoading: true });
-  //   fetch('http://127.0.0.1:5000/prediction/', 
-  //     {
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       method: 'POST',
-  //       body: JSON.stringify(formData)
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         result: response.result,
-  //         isLoading: false
-  //       });
-  //     });
-  // }
+  handleIncomeChange = (event) => {
+    // console.log("Event Value: " + event.target.value);
+    var cur_income = event.target.value
+    this.predict(cur_income);
 
-  // handleCancelClick = (event) => {
-  //   this.setState({ result: "" });
-  // }
+    this.setState({
+      income: event.target.value
+    });
+    
+  }
 
   render() {
-    // const isLoading = this.state.isLoading;
-    // const formData = this.state.formData;
-    const result = this.state.result;
+    var amtWine = "N/A";
+    var amtSweets = "N/A";
+    var amtFish = "N/A";
+    var amtMeat = "N/A";
 
-    // var sepalLengths = []
-    // for (var i = 4; i <= 7; i = +(i + 0.1).toFixed(1)) {
-    //   sepalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var sepalWidths = []
-    // for (var i = 2; i <= 4; i = +(i + 0.1).toFixed(1)) {
-    //   sepalWidths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var petalLengths = []
-    // for (var i = 1; i <= 6; i = +(i + 0.1).toFixed(1)){
-    //   petalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-    // var petalWidths = []
-    // for (var i = 0.1; i <= 3; i = +(i + 0.1).toFixed(1)) {
-    //   petalWidths.push(<option key = {i} value = {i}>{i}</option>);
-    // }
-
-    // if(this.state.result == "") {
-    //   this.handlePredictClick();
-    // }
+    if(this.results != "") {
+      var parsed = JSON.parse(this.results);
+      amtWine = parsed.wine;
+      amtSweets = parsed.sweetprod;
+      amtFish = parsed.fish
+      amtMeat = parsed.meat
+    }
 
     return (
-      // <Container>
-      //   <div>
-      //     <h1 className="title">Iris Plant Classifier</h1>
-      //   </div>
-      //   <div className="content">
-      //     <Form>
-      //       <Form.Row>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Sepal Length</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.sepalLength}
-      //             name="sepalLength"
-      //             onChange={this.handleChange}>
-      //             {sepalLengths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Sepal Width</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.sepalWidth}
-      //             name="sepalWidth"
-      //             onChange={this.handleChange}>
-      //             {sepalWidths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //       </Form.Row>
-      //       <Form.Row>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Petal Length</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.petalLength}
-      //             name="petalLength"
-      //             onChange={this.handleChange}>
-      //             {petalLengths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //         <Form.Group as={Col}>
-      //           <Form.Label>Petal Width</Form.Label>
-      //           <Form.Control 
-      //             as="select"
-      //             value={formData.petalWidth}
-      //             name="petalWidth"
-      //             onChange={this.handleChange}>
-      //             {petalWidths}
-      //           </Form.Control>
-      //         </Form.Group>
-      //       </Form.Row>
-      //       <Row>
-      //         <Col>
-      //           <Button
-      //             block
-      //             variant="success"
-      //             disabled={isLoading}
-      //             onClick={!isLoading ? this.handlePredictClick : null}>
-      //             { isLoading ? 'Making prediction' : 'Predict' }
-      //           </Button>
-      //         </Col>
-      //         <Col>
-      //           <Button
-      //             block
-      //             variant="danger"
-      //             disabled={isLoading}
-      //             onClick={this.handleCancelClick}>
-      //             Reset prediction
-      //           </Button>
-      //         </Col>
-      //       </Row>
-      //     </Form>
-      //     {result === "" ? null :
-      //       (<Row>
-      //         <Col className="result-container">
-      //           <h5 id="result">{result}</h5>
-      //         </Col>
-      //       </Row>)
-      //     }
-      //   </div>
-      // </Container>
-      // // <div>Testing</div>
-      
-      <div>
-        {result}
+      <div className="homeCont">
+        <div className="homeContPrim">
+          <div className="title">
+            ECS 171 Group 13 Project Demo
+          </div>
+          <div className="incomeInput">
+            <div>
+              Enter Income:
+            </div>
+            <input type="number" value={this.state.income} onChange={this.handleIncomeChangeRef}/>
+          </div>
+
+        </div>
+        <div className="homeContSec">
+          <div className="outputRow">
+            <div className="row" style={{paddingTop: '40px'}}>
+              <div className="col-6">
+                <div>
+                  Wine:
+                </div>
+                <div>
+                  {amtWine}
+                </div>
+              </div>
+              <div className="col-6">
+              <div>
+                  Sweets:
+                </div>
+                <div>
+                  {amtSweets}
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div className="outputRow">
+            <div className="row" style={{paddingTop: '40px'}}>
+              <div className="col-6">
+                <div>
+                  Fish:
+                </div>
+                <div>
+                  {amtFish}
+                </div>
+              </div>
+              <div className="col-6">
+                <div>
+                  Meat:
+                </div>
+                <div>
+                  {amtMeat}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
-  );
+    );
   }
 }
