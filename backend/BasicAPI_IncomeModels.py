@@ -69,6 +69,13 @@ meat_min = dfram['MntMeatProducts'].min()
 fish_max = dfram['MntFishProducts'].max()
 fish_min = dfram['MntFishProducts'].min()
 
+#fruit products
+fruit_max = dfram['MntFruits'].max()
+fruit_min = dfram['MntFruits'].min()
+
+#gold products
+gold_max = dfram['MntGoldProds'].max()
+gold_min = dfram['MntGoldProds'].min()
 
 dfram = dfram.drop(columns = ['Education','Marital_Status'])
 scaler = MinMaxScaler()
@@ -126,6 +133,8 @@ trainAndTest(dfram, 'MntWines')
 trainAndTest(dfram, 'MntSweetProducts')
 trainAndTest(dfram, 'MntMeatProducts')
 trainAndTest(dfram, 'MntFishProducts')
+trainAndTest(dfram, 'MntGoldProds')
+trainAndTest(dfram, 'MntFruits')
 
 
 # These expo functions will return the un-normalized amount
@@ -141,6 +150,12 @@ def expo_sweetproducts(X):
 def expo_wine(X):
     return  0.03253435 * np.exp(3.25207678*X) 
 
+def expo_gold(X):
+    return  0.05340341 * np.exp(2.1339927*X) 
+
+def expo_fruit(X):
+    return  0.01692545 * np.exp(3.57243742*X) 
+    
 # note that these output are based on how much a person is expected to buy in two years 
 def ui_api(income):
 
@@ -156,20 +171,22 @@ def ui_api(income):
     res_sweetproducts = expo_sweetproducts(income)
     res_meat = expo_meatproducts(income)
     res_fish = expo_fishproducts(income)
+    res_gold = expo_gold(income)
+    res_fruit = expo_fruit(income)
     
     # unormalize
     out_wine = res_wine*(wine_max-wine_min) + wine_min
     out_sweetproducts = res_sweetproducts*(sp_max-sp_min) + sp_min
     out_meat = res_meat * (meat_max-meat_min) + meat_min
     out_fish = res_fish * (fish_max - fish_min) + fish_min
+    out_fruit = res_fruit * (fruit_max - fruit_min) + fruit_min
+    out_gold = res_gold * (gold_max - gold_min) + gold_min
     
     res['wine'] = out_wine
     res['sweetprod']= out_sweetproducts
     res['meat'] = out_meat
     res['fish'] = out_fish
-    
-    return res
+    res['gold'] = out_gold
+    res['fruit'] = out_fruit
 
-# print(ui_api(10000))
-# print(ui_api(70000))
-# print(ui_api(100000))
+    return res
