@@ -68,12 +68,12 @@ export default class App extends Component {
   handleIncomeChange = (event) => {
     // console.log("Event Value: " + event.target.value);
     var cur_income = event.target.value;
-          
-    if(cur_income > 100000) {
-      cur_income = 100000;
+    var incomeToGive = cur_income;
+    if(incomeToGive > 100000) {
+      incomeToGive = 100000;
     }
 
-    this.predict(cur_income);
+    this.predict(incomeToGive);
 
     this.setState({
       income: cur_income
@@ -99,11 +99,24 @@ export default class App extends Component {
       amtGold = parsed.gold.toFixed(2);
     }
 
+    var introText = "With the rise of social media and online shopping, "
+    + "companies have sought ways to utilize big data, machine learning, and AI to increase profit."
+    + " The vast amounts of generated customer data give us insights into what attracts customers to specific products and services."
+    + " One of the main ways of using this data is creating better-performing marketing tools aimed at target audiences. "
+    + "Companies need to know which audiences are attracted to their advertisements and not waste resources. "
+    + "Our research seeks to create machine learning models which can utilize customer data and inform marketing decisions. "
+    + "We aim to discover which customer data attributes correlate most with what type of products they will purchase and how these attributes relate to each other to predict customer habits. "
+    + "Knowing what attributes of customer data make marketing campaigns successful, companies can use machine learning models like the ones we researched to better "
+    + "understand which customers they should be targeting for specific ad campaigns. "
+
     return (
       <div className="homeCont">
         <div className="homeContPrim">
           <div className="title">
             ECS 171 Group 13 Project Demo
+          </div>
+          <div className="homeContText">
+            {introText}
           </div>
           <div className="incomeInput">
             <div>

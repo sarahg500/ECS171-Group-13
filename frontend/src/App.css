@@ -1,30 +1,42 @@
 .homeCont {
-  height: 100vh;
+  width: 100%;
   font-family: 'Courier New', Courier, monospace;
+  padding: 0;
+  overflow-x: hidden;
+  background-image: "https://food.fnr.sndimg.com/content/dam/images/food/secured/fullset/2014/4/17/0/GK0200_BTS_produce-section_s4x3.jpg.rend.hgtvcom.966.725.suffix/1397761349158.jpeg";
+  background-color: transparent;
+
 }
 
 .homeContPrim {
-  height: 50vh;
-  background-color: #fff;
+  /* background-color: #fff; */
+  padding-right: 0;
+}
+
+.homeContText {
+  height: 20vh;
+  text-align: center;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 .homeContSec {
   height: 50vh;
-  background-color: #f5f5dc;
+  /* background-color: #f5f5dc; */
   text-align: center;
   font-size: 40px;
 }
 
 .title {
-  height: 15vh;
+  height: 10vh;
   font-size: 50px;
   text-align: center;
 }
 
 .incomeInput {
-  height: 30vh;
-  text-align: center;
   margin-top: 5vh;
+  height: 15vh;
+  text-align: center;
   font-size: 30px;
 }
 
