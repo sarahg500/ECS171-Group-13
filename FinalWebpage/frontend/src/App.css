@@ -1,0 +1,167 @@
+div.CenterRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+label {
+  color: #333;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1{
+  color: black;
+  font-size: 30px;
+  font-weight: 20px;
+  background: rgba(128,128,128,.7) ;
+}
+p.Team_Members{
+  margin-bottom: 80px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-weight: 30px;
+  background: rgba(240, 234, 214, .8) ;
+  color: black;
+  border-radius: 10px;
+
+}
+p.Bio{
+  text-indent: 60px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-weight: 30px;
+  color: black;
+  text-align: left;
+}
+div#outer {
+  width: 100%;
+  padding-bottom: 490px;
+  margin-bottom: -490px;
+  background-image: url('Yosemite.jpeg');
+  text-align: center;
+}
+div#bio {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: rgba(240, 234, 214, .8);
+  border-radius: 10px;
+}
+
+button.link {
+  margin: 10px;
+  padding: 15px;
+  width: 120px;
+  border-radius: 10px;
+}
+p.LinkCSS{
+  margin: 5px;
+  padding: 5px;
+  width: 70px;
+  color: black;
+}
+
+
+div.footnote {
+  font-size: small;
+  text-align: left;
+  align-self: flex-end;
+  max-width: 200px;
+}
+
+div.page_container{
+  width: 100%;
+  padding-bottom: 800px;
+  margin-bottom: -800px;
+  background-image:  url('Yosemite.jpeg');
+  text-align: center;
+}
+
+.background_image{
+  padding-left: 500px;
+  margin-left: 500px;
+  padding-right:500px;
+  margin-right: 500px;
+  padding-bottom:1200px;
+  margin-bottom: 1200px;
+  background-image:  url('Yosemite.jpeg');
+  margin: auto;
+  
+}
+
+.homeCont {
+  height: 100vh;
+  padding-left: 500px;
+  margin-left: 500px;
+  padding-right: 500px;
+  margin-right: 500px;
+  padding-bottom:1200px;
+  margin-bottom: 1200px;
+  font-family: 'Courier New', Courier, monospace;
+  background-image:  url('Yosemite.jpeg');
+  margin: auto;
+}
+
+.homeContPrim {
+  height: 50vh;
+}
+
+.homeContSec {
+  height: 50vh;
+  text-align: center;
+  font-size: 40px;
+  background: rgba(240, 234, 214, .8) ;
+  border-radius: 10px;
+  padding-bottom: 30px;
+}
+
+.title {
+  height: 20vh;
+  font-size: 50px;
+  text-align: center;
+  width:100%;
+  background: rgba(168, 168, 168, .8) ;
+  border-radius: 10px;
+
+}
+
+.incomeInput {
+  height: 15vh;
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 30px;
+  background: rgba(240, 234, 214, .8) ;
+  border-radius: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.outputRow {
+  height: 25vh
+}
+.goHome{
+  margin-top: 100px;
+  background: rgba(240, 234, 214, .8) ;
+  align-self: center;
+  padding: 15px;
+  width: 300px;
+  border-radius: 10px;
+}
